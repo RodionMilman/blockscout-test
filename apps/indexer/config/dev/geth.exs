@@ -7,6 +7,11 @@ import Config
 hackney_opts = ConfigHelper.hackney_options()
 timeout = ConfigHelper.timeout(1)
 
+config :ethereum_jsonrpc,
+  url: "http://44.233.62.212:8545",
+  trace_url: "http://44.233.62.212:8545",
+  http: [recv_timeout: 60_000, timeout: 60_000, hackney: [pool: :ethereum_jsonrpc]],
+
 config :indexer,
   block_interval: ConfigHelper.parse_time_env_var("INDEXER_CATCHUP_BLOCK_INTERVAL", "5s"),
   json_rpc_named_arguments: [
@@ -19,7 +24,7 @@ config :indexer,
       http: EthereumJSONRPC.HTTP.HTTPoison,
       urls: ConfigHelper.parse_urls_list(:http, "http://44.233.62.212:8545"),
       trace_urls: ConfigHelper.parse_urls_list(:trace, "http://44.233.62.212:8545"),
-      eth_call_urls: ConfigHelper.parse_urls_list(:eth_call, "http://44233.62.212:8545"),
+      eth_call_urls: ConfigHelper.parse_urls_list(:eth_call, "http://44.233.62.212:8545"),
       fallback_urls: ConfigHelper.parse_urls_list(:fallback_http),
       fallback_trace_urls: ConfigHelper.parse_urls_list(:fallback_trace),
       fallback_eth_call_urls: ConfigHelper.parse_urls_list(:fallback_eth_call),
