@@ -7,11 +7,6 @@ import Config
 hackney_opts = ConfigHelper.hackney_options()
 timeout = ConfigHelper.timeout(1)
 
-config :ethereum_jsonrpc,
-  url: "http://44.233.62.212:8545",
-  trace_url: "http://44.233.62.212:8545",
-  http: [recv_timeout: 60_000, timeout: 60_000, hackney: [pool: :ethereum_jsonrpc]],
-
 config :indexer,
   block_interval: ConfigHelper.parse_time_env_var("INDEXER_CATCHUP_BLOCK_INTERVAL", "5s"),
   json_rpc_named_arguments: [
